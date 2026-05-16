@@ -3,6 +3,7 @@ from discord.ext import commands
 from discord import app_commands
 import os
 from dotenv import load_dotenv
+import websitecheck
 
 load_dotenv()
 
@@ -59,6 +60,11 @@ async def link(interaction: discord.Interaction, website: str):
             f"❌ Invalid link! {interaction.user.mention}"
         )
         return
+    elif websitecheck.check(website) == "Unsafe URL":
+        await interaction.followup.send(
+        f"❌ Unsafe link! {interaction.user.mention}"
+    )
+    return
 
     await interaction.followup.send(
         f"✅ Link received! Thank you {interaction.user.mention}"
