@@ -97,8 +97,8 @@ async def link(interaction: discord.Interaction, website: str):
 
     try:
         
-        model=joblib.load('discord-link-bot\website_categorizer3.joblib')
-        vectorizer=joblib.load(r'discord-link-bot\vectorizer3.joblib')
+        model=joblib.load('website_categorizer3.joblib')
+        vectorizer=joblib.load('vectorizer3.joblib')
         if not website.startswith(("http://", "https://")):
             website = "https://" + website
 
