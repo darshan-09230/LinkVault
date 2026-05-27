@@ -27,13 +27,12 @@ class WebsiteDataExtractor:
             "accept cookies", "all rights reserved"
         ]
 
-    # ================= FETCH =================
+    
     def get_page(self):
         r = requests.get(self.url, headers=self.headers, timeout=15)
         r.raise_for_status()
         return r.text
 
-    # ================= CLEAN =================
     def clean_text(self, text):
         if not text:
             return ""
@@ -61,7 +60,7 @@ class WebsiteDataExtractor:
         sentences = re.split(r'(?<=[.!?]) +', text)
         return " ".join(OrderedDict.fromkeys(sentences))
 
-    # ================= TOKENS =================
+    
     def tokenize_domain(self, domain):
         domain = domain.lower().replace("www.", "")
         domain = re.sub(r"\.(com|org|net|io|ai|app|dev|co|in)$", "", domain)
@@ -73,8 +72,11 @@ class WebsiteDataExtractor:
         path = re.sub(r"[-_]", " ", path)
         path = re.sub(r"[^a-zA-Z0-9\s]", " ", path)
         return re.sub(r"\s+", " ", path).strip().lower()
+    
 
-    # ================= MAIN =================
+    #main
+
+
     def extract(self):
 
         html = self.get_page()
